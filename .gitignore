@@ -1,0 +1,9 @@
+*.class
+*.pyc
+*.pyo
+.project
+/vendor/*
+/tmp/*.log
+*.class
+*.pyc
+*.pyo

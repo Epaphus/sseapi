@@ -1,0 +1,45 @@
+<%
+outages = 0
+totaloutages = 0%>
+
+	<h1> SSE Power outages </h1>
+    <br>
+    <a href=<%= request.url.chomp request.path_info %>/rss> RSS feed </a><br />
+    <a href=<%= request.url.chomp request.path_info %>/map> Google Map view of outages</a>
+    <br />
+    <hr />
+    
+  <% @data['faults'].each do |item|
+    totaloutages+=1
+
+
+      affectedareas = ""
+       item['affectedAreas'].each do |area|
+        affectedareas = "#{affectedareas} #{area}, "
+      end
+   %>   
+      Reference: <%= item['reference']%> <br>
+      Title: <%= item['title'] %> <br>
+      Type: <%= item['type'] %> <br>
+      <a href="http://maps.google.com/?q=<%= item['location']['latitude'] %>,<%= item['location']['longitude'] %>">Google Maps Link</a>  <br>
+      Logged at: <%= item['loggedAtUtc'] %> <br>
+      Estimated arrival of onsite engineer: <%= item['estimatedArrivalOnSiteUtc'] %> <br>
+      Estimated fault update time: <%= item['estimatedFaultUpdateTimeUtc'] %> <br>
+      Message: <%= item['message'] %> <br>
+      Affected Areas: <%= affectedareas %>
+      <br>
+      <br>
+      <hr>
+          
+  <%       outages+=1
+    affectedareas = ""
+  end
+  if outages == 0 
+    %> No reported outages
+  <% end %>
+
+  <br><br>
+   <hr>
+   Total outages: <%= totaloutages %> 
+   <br>
+
