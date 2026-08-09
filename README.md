@@ -1,3 +1,12 @@
+Please note
+============
+SSE changed the power track API, this no longer works.
+
+   
+   
+   
+   
+
 SSE api
 ============
 
